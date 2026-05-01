@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
+<!-- ✅ MUST for mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Rajagiri Quick Access</title> 
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -18,25 +22,32 @@ body {
 /* HEADER */
 header {
     text-align: center;
-    padding: 40px 20px;
+    padding: 30px 15px;
 }
 header h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     background: linear-gradient(to right, #38bdf8, #22c55e);
     -webkit-background-clip: text;
     color: transparent;
 }
 header p {
     opacity: 0.7;
+    font-size: 14px;
 }
 
 /* SEARCH */
 .search-box {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
     margin: 20px;
 }
+
 .search-box input {
-    width: 260px;
+    width: 100%;
+    max-width: 280px;
     padding: 10px;
     border-radius: 8px;
     border: none;
@@ -45,7 +56,6 @@ header p {
 
 .search-box button {
     padding: 10px 14px;
-    margin-left: 8px;
     border-radius: 8px;
     border: none;
     background: #22c55e;
@@ -58,33 +68,39 @@ header p {
 
 /* GRID */
 .container {
-    padding: 30px;
+    padding: 20px;
 }
+
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+    gap: 15px;
 }
 
 /* CARD */
 .card {
     background: rgba(255,255,255,0.08);
     border-radius: 15px;
-    padding: 20px;
+    padding: 15px;
     text-align: center;
     transition: 0.3s;
     backdrop-filter: blur(10px);
-    cursor: pointer;
 }
+
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 /* ICON */
 .icon {
-    font-size: 30px;
-    margin-bottom: 10px;
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+/* TEXT */
+.card h3 {
+    font-size: 14px;
 }
 
 /* LINK */
@@ -96,8 +112,35 @@ a {
 /* FOOTER */
 footer {
     text-align: center;
-    padding: 20px;
-    opacity: 0.6;
+    padding: 15px;
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+/* 📱 MOBILE OPTIMIZATION */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+        padding: 12px;
+    }
+
+    .card h3 {
+        font-size: 13px;
+    }
+}
+
+/* 💻 LARGE SCREEN IMPROVEMENT */
+@media (min-width: 1024px) {
+    .container {
+        padding: 40px 80px;
+    }
 }
 </style>
 </head>
@@ -165,7 +208,7 @@ footer {
 </div>
 
 <footer>
-<p>Designed for Rajagiri CS Department • Quick Access Portal</p><br>
+<p>Designed for Rajagiri CS Department • Quick Access Portal</p>
 <p>Powered by RLabZ & AJ13 © 2026</p>
 </footer>
 
