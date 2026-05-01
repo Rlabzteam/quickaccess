@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rajagiri Quick Access</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #1e3a8a, #020617);
+    color: white;
+}
+
+/* HEADER */
+header {
+    text-align: center;
+    padding: 40px 20px;
+}
+header h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(to right, #38bdf8, #22c55e);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+header p {
+    opacity: 0.7;
+}
+
+/* SEARCH */
+.search-box {
+    text-align: center;
+    margin: 20px;
+}
+.search-box input {
+    width: 260px;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+.search-box button {
+    padding: 10px 14px;
+    margin-left: 8px;
+    border-radius: 8px;
+    border: none;
+    background: #22c55e;
+    color: white;
+    cursor: pointer;
+}
+.search-box button:hover {
+    background: #16a34a;
+}
+
+/* GRID */
+.container {
+    padding: 30px;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 20px;
+}
+
+/* CARD */
+.card {
+    background: rgba(255,255,255,0.08);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+}
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+}
+
+/* ICON */
+.icon {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+/* LINK */
+a {
+    text-decoration: none;
+    color: white;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    opacity: 0.6;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Rajagiri Quick Access</h1>
+<p>All Essential Portals in One Place</p>
+</header>
+
+<div class="search-box">
+<input type="text" id="search" placeholder="Search portal..." onkeyup="filterCards()">
+<button onclick="resetSearch()">Reset</button>
+</div>
+
+<div class="container">
+<div class="grid" id="grid">
+
+<a href="https://rajagiri.edu" target="_blank">
+<div class="card"><div class="icon">🏫</div><h3>College Site</h3></div>
+</a>
+
+<a href="https://fedena.rajagiri.edu/" target="_blank">
+<div class="card"><div class="icon">📊</div><h3>Fedena</h3></div>
+</a>
+
+<a href="https://lms.rajagiri.edu/login/index.php" target="_blank">
+<div class="card"><div class="icon">📚</div><h3>Moodle LMS</h3></div>
+</a>
+
+<a href="http://connect.rajagiri.edu/" target="_blank">
+<div class="card"><div class="icon">🌐</div><h3>Campus Connect</h3></div>
+</a>
+
+<a href="https://mypunch.rajagiri.edu/login_page/?next=/" target="_blank">
+<div class="card"><div class="icon">⏱️</div><h3>MyPunch</h3></div>
+</a>
+
+<a href="https://odtracker.rajagiri.edu/" target="_blank">
+<div class="card"><div class="icon">📝</div><h3>OD Tracker</h3></div>
+</a>
+
+<a href="https://digirex.rajagiri.edu/user/login.php" target="_blank">
+<div class="card"><div class="icon">📄</div><h3>Answer Sheet Portal</h3></div>
+</a>
+
+<a href="https://mentrix.rajagiri.edu" target="_blank">
+<div class="card"><div class="icon">🎯</div><h3>Mentrix</h3></div>
+</a>
+
+<a href="https://rlabz.in/" target="_blank">
+<div class="card"><div class="icon">💡</div><h3>RLabZ</h3></div>
+</a>
+
+<a href="#" target="_blank">
+<div class="card"><div class="icon">🚀</div><h3>RLabZ Projects</h3></div>
+</a>
+
+<a href="https://sites.google.com/rajagiri.edu/computer-science-department/home" target="_blank">
+<div class="card"><div class="icon">📂</div><h3>Department Documents</h3></div>
+</a>
+
+</div>
+</div>
+
+<footer>
+<p>Designed for Rajagiri Staff • Quick Access Portal</p>
+</footer>
+
+<script>
+function filterCards() {
+    let input = document.getElementById("search").value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+        let text = card.innerText.toLowerCase();
+        card.parentElement.style.display = text.includes(input) ? "block" : "none";
+    });
+}
+
+function resetSearch() {
+    document.getElementById("search").value = "";
+    filterCards();
+}
+</script>
+
+</body>
+</html>
