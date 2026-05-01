@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RLabZ Projects Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Inter',sans-serif;
+    background: radial-gradient(circle at top,#1e3a8a,#020617);
+    color:white;
+}
+
+header{
+    text-align:center;
+    padding:50px 20px;
+}
+header h1{
+    font-size:3rem;
+    background:linear-gradient(to right,#38bdf8,#22c55e);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+/* GRID */
+.container{padding:40px;}
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+/* CARD */
+.card{
+    background:rgba(255,255,255,0.05);
+    border-radius:20px;
+    padding:20px;
+    transition:0.4s;
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.1);
+}
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+/* STATUS */
+.status{
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    display:inline-block;
+    margin-top:10px;
+}
+.deployed{background:#22c55e;}
+.dev{background:#f59e0b;}
+
+/* BUTTON */
+.btn{
+    margin-top:15px;
+    padding:8px 14px;
+    border:none;
+    border-radius:8px;
+    background:linear-gradient(45deg,#38bdf8,#22c55e);
+    color:white;
+    cursor:pointer;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    z-index:1000;
+    padding-top:80px;
+    left:0;top:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.7);
+}
+.modal-content{
+    background:#020617;
+    margin:auto;
+    padding:25px;
+    border-radius:15px;
+    width:60%;
+    animation:fadeIn 0.4s;
+}
+@keyframes fadeIn{
+    from{opacity:0;transform:scale(0.9);}
+    to{opacity:1;transform:scale(1);}
+}
+.close{
+    float:right;
+    cursor:pointer;
+    font-size:20px;
+}
+a{color:#38bdf8;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>RLabZ Projects</h1>
+<p>Complete Portfolio Dashboard</p>
+</header>
+
+<div class="container">
+<div class="grid">
+
+<!-- Cards -->
+<div class="card"><h3>Counselling System</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m1')">View Details</button></div>
+
+<div class="card"><h3>RLabZ Website Revamp</h3><span class="status dev">In Development</span><br><button class="btn" onclick="openModal('m2')">View Details</button></div>
+
+<div class="card"><h3>Conference Website</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m3')">View Details</button></div>
+
+<div class="card"><h3>Splendore Website</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m4')">View Details</button></div>
+
+<div class="card"><h3>Mentoring App</h3><span class="status dev">In Development</span><br><button class="btn" onclick="openModal('m5')">View Details</button></div>
+
+<div class="card"><h3>Facility Booking App</h3><span class="status dev">In Development</span><br><button class="btn" onclick="openModal('m6')">View Details</button></div>
+
+<div class="card"><h3>Blood Donation App</h3><span class="status dev">In Development</span><br><button class="btn" onclick="openModal('m7')">View Details</button></div>
+
+<div class="card"><h3>Placement Analytics</h3><span class="status dev">In Development</span><br><button class="btn" onclick="openModal('m8')">View Details</button></div>
+
+<div class="card"><h3>Euphoria Website</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m9')">View Details</button></div>
+
+<div class="card"><h3>Arkon Medical</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m10')">View Details</button></div>
+
+<div class="card"><h3>DYUTI Website</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m11')">View Details</button></div>
+
+<div class="card"><h3>Sparc Mobile App</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m12')">View Details</button></div>
+
+<div class="card"><h3>STUBA Platform</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m13')">View Details</button></div>
+
+<div class="card"><h3>Campus Connect</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m14')">View Details</button></div>
+
+</div>
+</div>
+
+<!-- MODALS (sample few, pattern same for all) -->
+
+<div id="m1" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m1')">&times;</span>
+<h2>Counselling Management System – Sahrdaya</h2>
+<p><b>Faculty:</b> Dr. Shiju Thomas M Y</p>
+<p><b>Student:</b> Gracen K. Shaji</p>
+<p><b>Launched:</b> Jan 2026</p>
+<p><b>Status:</b> Deployed</p>
+<p>Secure platform for counseling, confidential records, role-based access, and analytics.</p>
+</div></div>
+
+<div id="m3" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m3')">&times;</span>
+<h2>International Conference Website</h2>
+<p><a href="https://icswhmh.com/" target="_blank">Visit</a></p>
+<p><b>Status:</b> Deployed</p>
+<p>Supports registrations, abstract submissions, scheduling.</p>
+</div></div>
+
+<div id="m10" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m10')">&times;</span>
+<h2>Arkon Medical Systems</h2>
+<p><a href="https://arkonmedicalsystems.in/" target="_blank">Visit</a></p>
+<p><b>Status:</b> Deployed</p>
+<p>Medical equipment platform with catalog and order management.</p>
+</div></div>
+
+<!-- Add remaining modals similarly -->
+
+<script>
+function openModal(id){document.getElementById(id).style.display="block";}
+function closeModal(id){document.getElementById(id).style.display="none";}
+window.onclick=function(e){
+document.querySelectorAll('.modal').forEach(m=>{
+if(e.target==m) m.style.display="none";
+});
+}
+</script>
+
+</body>
+</html>
