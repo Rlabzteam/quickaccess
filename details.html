@@ -2,23 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RLabZ Projects Dashboard</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
 body{
     font-family:'Inter',sans-serif;
     background: radial-gradient(circle at top,#1e3a8a,#020617);
     color:white;
+    min-height:100vh;
 }
 
 header{
     text-align:center;
     padding:50px 20px;
 }
+
 header h1{
     font-size:3rem;
     background:linear-gradient(to right,#38bdf8,#22c55e);
@@ -26,8 +33,17 @@ header h1{
     color:transparent;
 }
 
+header p{
+    margin-top:10px;
+    color:#cbd5e1;
+}
+
+/* CONTAINER */
+.container{
+    padding:40px;
+}
+
 /* GRID */
-.container{padding:40px;}
 .grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -43,9 +59,14 @@ header h1{
     backdrop-filter:blur(12px);
     border:1px solid rgba(255,255,255,0.1);
 }
+
 .card:hover{
     transform:translateY(-10px);
     box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+.card h3{
+    margin-bottom:10px;
 }
 
 /* STATUS */
@@ -56,18 +77,29 @@ header h1{
     display:inline-block;
     margin-top:10px;
 }
-.deployed{background:#22c55e;}
-.dev{background:#f59e0b;}
+
+.deployed{
+    background:#22c55e;
+}
+
+.dev{
+    background:#f59e0b;
+}
 
 /* BUTTON */
 .btn{
     margin-top:15px;
-    padding:8px 14px;
+    padding:10px 16px;
     border:none;
     border-radius:8px;
     background:linear-gradient(45deg,#38bdf8,#22c55e);
     color:white;
     cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    opacity:0.9;
 }
 
 /* MODAL */
@@ -76,10 +108,13 @@ header h1{
     position:fixed;
     z-index:1000;
     padding-top:80px;
-    left:0;top:0;
-    width:100%;height:100%;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
     background:rgba(0,0,0,0.7);
 }
+
 .modal-content{
     background:#020617;
     margin:auto;
@@ -87,96 +122,242 @@ header h1{
     border-radius:15px;
     width:60%;
     animation:fadeIn 0.4s;
+    border:1px solid rgba(255,255,255,0.1);
 }
+
+.modal-content h2{
+    margin-bottom:15px;
+}
+
+.modal-content p{
+    margin:10px 0;
+    color:#cbd5e1;
+}
+
 @keyframes fadeIn{
-    from{opacity:0;transform:scale(0.9);}
-    to{opacity:1;transform:scale(1);}
+    from{
+        opacity:0;
+        transform:scale(0.9);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
 }
+
 .close{
     float:right;
     cursor:pointer;
-    font-size:20px;
+    font-size:22px;
 }
-a{color:#38bdf8;}
+
+a{
+    color:#38bdf8;
+    text-decoration:none;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .modal-content{
+        width:90%;
+    }
+
+    header h1{
+        font-size:2rem;
+    }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>RLabZ Projects</h1>
-<p>Complete Portfolio Dashboard</p>
+    <h1>RLabZ Projects</h1>
+    <p>Complete Portfolio Dashboard</p>
 </header>
 
 <div class="container">
 <div class="grid">
 
-<!-- Cards -->
-<div class="card"><h3>Counselling System</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m1')">View Details</button></div>
+<!-- Existing Projects -->
 
-<div class="card"><h3>RLabZ Website Revamp</h3><span class="status dev">In Development</span><br><button class="btn" onclick="openModal('m2')">View Details</button></div>
+<div class="card">
+    <h3>Counselling System</h3>
+    <span class="status deployed">Deployed</span><br>
+    <button class="btn" onclick="openModal('m1')">View Details</button>
+</div>
 
-<div class="card"><h3>Conference Website</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m3')">View Details</button></div>
+<div class="card">
+    <h3>RLabZ Website Revamp</h3>
+    <span class="status dev">In Development</span><br>
+    <button class="btn" onclick="openModal('m2')">View Details</button>
+</div>
 
-<div class="card"><h3>Splendore Website</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m4')">View Details</button></div>
+<div class="card">
+    <h3>Conference Website</h3>
+    <span class="status deployed">Deployed</span><br>
+    <button class="btn" onclick="openModal('m3')">View Details</button>
+</div>
 
-<div class="card"><h3>Mentoring App</h3><span class="status dev">In Development</span><br><button class="btn" onclick="openModal('m5')">View Details</button></div>
+<div class="card">
+    <h3>Splendore Website</h3>
+    <span class="status deployed">Deployed</span><br>
+    <button class="btn" onclick="openModal('m4')">View Details</button>
+</div>
 
-<div class="card"><h3>Facility Booking App</h3><span class="status dev">In Development</span><br><button class="btn" onclick="openModal('m6')">View Details</button></div>
+<div class="card">
+    <h3>Mentoring App</h3>
+    <span class="status dev">In Development</span><br>
+    <button class="btn" onclick="openModal('m5')">View Details</button>
+</div>
 
-<div class="card"><h3>Blood Donation App</h3><span class="status dev">In Development</span><br><button class="btn" onclick="openModal('m7')">View Details</button></div>
+<div class="card">
+    <h3>Facility Booking App</h3>
+    <span class="status dev">In Development</span><br>
+    <button class="btn" onclick="openModal('m6')">View Details</button>
+</div>
 
-<div class="card"><h3>Placement Analytics</h3><span class="status dev">In Development</span><br><button class="btn" onclick="openModal('m8')">View Details</button></div>
+<div class="card">
+    <h3>Blood Donation App</h3>
+    <span class="status dev">In Development</span><br>
+    <button class="btn" onclick="openModal('m7')">View Details</button>
+</div>
 
-<div class="card"><h3>Euphoria Website</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m9')">View Details</button></div>
+<div class="card">
+    <h3>Placement Analytics</h3>
+    <span class="status dev">In Development</span><br>
+    <button class="btn" onclick="openModal('m8')">View Details</button>
+</div>
 
-<div class="card"><h3>Arkon Medical</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m10')">View Details</button></div>
+<div class="card">
+    <h3>Euphoria Website</h3>
+    <span class="status deployed">Deployed</span><br>
+    <button class="btn" onclick="openModal('m9')">View Details</button>
+</div>
 
-<div class="card"><h3>DYUTI Website</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m11')">View Details</button></div>
+<div class="card">
+    <h3>Arkon Medical</h3>
+    <span class="status deployed">Deployed</span><br>
+    <button class="btn" onclick="openModal('m10')">View Details</button>
+</div>
 
-<div class="card"><h3>Sparc Mobile App</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m12')">View Details</button></div>
+<div class="card">
+    <h3>DYUTI Website</h3>
+    <span class="status deployed">Deployed</span><br>
+    <button class="btn" onclick="openModal('m11')">View Details</button>
+</div>
 
-<div class="card"><h3>STUBA Platform</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m13')">View Details</button></div>
+<div class="card">
+    <h3>Sparc Mobile App</h3>
+    <span class="status deployed">Deployed</span><br>
+    <button class="btn" onclick="openModal('m12')">View Details</button>
+</div>
 
-<div class="card"><h3>Campus Connect</h3><span class="status deployed">Deployed</span><br><button class="btn" onclick="openModal('m14')">View Details</button></div>
+<div class="card">
+    <h3>STUBA Platform</h3>
+    <span class="status deployed">Deployed</span><br>
+    <button class="btn" onclick="openModal('m13')">View Details</button>
+</div>
+
+<div class="card">
+    <h3>Campus Connect</h3>
+    <span class="status deployed">Deployed</span><br>
+    <button class="btn" onclick="openModal('m14')">View Details</button>
+</div>
+
+<!-- NEW PROJECTS -->
+
+<div class="card">
+    <h3>ColabSphere</h3>
+    <span class="status dev">In Development</span><br>
+    <button class="btn" onclick="openModal('m15')">View Details</button>
+</div>
+
+<div class="card">
+    <h3>Project of Exam Cell</h3>
+    <span class="status dev">In Development</span><br>
+    <button class="btn" onclick="openModal('m16')">View Details</button>
+</div>
 
 </div>
 </div>
 
-<!-- MODALS (sample few, pattern same for all) -->
+<!-- MODALS -->
 
-<div id="m1" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m1')">&times;</span>
+<div id="m1" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal('m1')">&times;</span>
 <h2>Counselling Management System – Sahrdaya</h2>
 <p><b>Faculty:</b> Dr. Shiju Thomas M Y</p>
 <p><b>Student:</b> Gracen K. Shaji</p>
 <p><b>Launched:</b> Jan 2026</p>
 <p><b>Status:</b> Deployed</p>
 <p>Secure platform for counseling, confidential records, role-based access, and analytics.</p>
-</div></div>
+</div>
+</div>
 
-<div id="m3" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m3')">&times;</span>
+<div id="m3" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal('m3')">&times;</span>
 <h2>International Conference Website</h2>
-<p><a href="https://icswhmh.com/" target="_blank">Visit</a></p>
+<p><a href="https://icswhmh.com/" target="_blank">Visit Website</a></p>
 <p><b>Status:</b> Deployed</p>
 <p>Supports registrations, abstract submissions, scheduling.</p>
-</div></div>
+</div>
+</div>
 
-<div id="m10" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m10')">&times;</span>
+<div id="m10" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal('m10')">&times;</span>
 <h2>Arkon Medical Systems</h2>
-<p><a href="https://arkonmedicalsystems.in/" target="_blank">Visit</a></p>
+<p><a href="https://arkonmedicalsystems.in/" target="_blank">Visit Website</a></p>
 <p><b>Status:</b> Deployed</p>
 <p>Medical equipment platform with catalog and order management.</p>
-</div></div>
+</div>
+</div>
 
-<!-- Add remaining modals similarly -->
+<!-- NEW MODALS -->
+
+<div id="m15" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal('m15')">&times;</span>
+<h2>ColabSphere</h2>
+<p><b>Type:</b> Web Application</p>
+<p><b>Team:</b> Jeffin Joby and Jasin Joji</p>
+<p><b>Status:</b> In Development</p>
+<p>Collaborative web platform developed under RLabZ.</p>
+</div>
+</div>
+
+<div id="m16" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal('m16')">&times;</span>
+<h2>Project of Exam Cell</h2>
+<p><b>Team:</b> Shyam James and Jubin Joy</p>
+<p><b>Status:</b> In Development</p>
+<p>Exam Cell management and automation platform developed under RLabZ.</p>
+</div>
+</div>
 
 <script>
-function openModal(id){document.getElementById(id).style.display="block";}
-function closeModal(id){document.getElementById(id).style.display="none";}
+function openModal(id){
+    document.getElementById(id).style.display="block";
+}
+
+function closeModal(id){
+    document.getElementById(id).style.display="none";
+}
+
 window.onclick=function(e){
-document.querySelectorAll('.modal').forEach(m=>{
-if(e.target==m) m.style.display="none";
-});
+    document.querySelectorAll('.modal').forEach(m=>{
+        if(e.target==m){
+            m.style.display="none";
+        }
+    });
 }
 </script>
 
