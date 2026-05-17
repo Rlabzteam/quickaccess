@@ -430,14 +430,25 @@ function editProject(no){
 
 /* SAVE */
 
+/* SAVE */
+
 function saveProject(){
 
     let editNo =
     document.getElementById("editNo").value;
 
+    /* AUTO GENERATE NEXT NUMBER */
+
+    let nextNo =
+    Math.max(
+        ...projects.map(p =>
+            Number(p.no) || 0
+        )
+    ) + 1;
+
     let data = {
 
-        no: editNo || String(Date.now()),
+        no: editNo || String(nextNo),
 
         project_name:
         document.getElementById("project_name").value,
@@ -526,7 +537,6 @@ function saveProject(){
     }
 
 }
-
 /* DELETE */
 
 function deleteProject(no){
