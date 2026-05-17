@@ -41,7 +41,7 @@ body{
     text-align:center;
 }
 
-input, textarea, select{
+input, textarea{
     width:100%;
     padding:12px;
     margin-top:10px;
@@ -83,6 +83,13 @@ header h1{
     background:linear-gradient(to right,#38bdf8,#22c55e);
     -webkit-background-clip:text;
     color:transparent;
+}
+
+.logout-btn{
+    width:auto;
+    padding:10px 20px;
+    margin-top:15px;
+    background:#ef4444;
 }
 
 .form-box{
@@ -156,9 +163,13 @@ header h1{
 
     <h2>RLabZ Admin Login</h2>
 
-    <input type="password" id="password" placeholder="Enter Password">
+    <input type="password"
+    id="password"
+    placeholder="Enter Password">
 
-    <button onclick="login()">Login</button>
+    <button onclick="login()">
+        Login
+    </button>
 
 </div>
 
@@ -167,34 +178,62 @@ header h1{
 <div id="adminPanel">
 
 <header>
+
     <h1>RLabZ Admin Panel</h1>
+
+    <button class="logout-btn"
+    onclick="logout()">
+
+        Logout
+
+    </button>
+
 </header>
 
 <!-- FORM -->
 
 <div class="form-box">
 
-    <h2 id="formTitle">Add New Project</h2>
+    <h2 id="formTitle">
+        Add New Project
+    </h2>
 
     <input type="hidden" id="editNo">
 
-    <input type="text" id="project_name" placeholder="Project Name">
+    <input type="text"
+    id="project_name"
+    placeholder="Project Name">
 
-    <input type="text" id="status" placeholder="Status">
+    <input type="text"
+    id="status"
+    placeholder="Status">
 
-    <input type="text" id="type" placeholder="Type">
+    <input type="text"
+    id="type"
+    placeholder="Type">
 
-    <input type="text" id="team" placeholder="Team">
+    <input type="text"
+    id="team"
+    placeholder="Team">
 
-    <input type="text" id="faculty" placeholder="Faculty">
+    <input type="text"
+    id="faculty"
+    placeholder="Faculty">
 
-    <input type="text" id="launched" placeholder="Launched">
+    <input type="text"
+    id="launched"
+    placeholder="Launched">
 
-    <input type="text" id="website" placeholder="Website">
+    <input type="text"
+    id="website"
+    placeholder="Website">
 
-    <textarea id="description" placeholder="Description"></textarea>
+    <textarea id="description"
+    placeholder="Description"></textarea>
 
-    <button onclick="saveProject()">Save Project</button>
+    <button onclick="saveProject()">
+        Save Project
+    </button>
 
 </div>
 
@@ -211,7 +250,11 @@ const API =
 
 const ADMIN_PASSWORD = "rlabz123";
 
+const DELETE_PASSWORD = "rlabzandcs";
+
 let projects = [];
+
+/* LOGIN */
 
 function login(){
 
@@ -237,6 +280,23 @@ function login(){
 
 }
 
+/* LOGOUT */
+
+function logout(){
+
+    document.getElementById("adminPanel")
+    .style.display = "none";
+
+    document.getElementById("loginBox")
+    .style.display = "block";
+
+    document.getElementById("password")
+    .value = "";
+
+}
+
+/* LOAD PROJECTS */
+
 function loadProjects(){
 
     fetch(API)
@@ -246,9 +306,11 @@ function loadProjects(){
     .then(data => {
 
         projects = data.filter(p =>
+
             p.project_name &&
-            p.project_name !== "project_name" &&
-            p.project_name.trim() !== ""
+            p.project_name.trim() !== "" &&
+            p.project_name !== "project_name"
+
         );
 
         renderProjects();
@@ -256,6 +318,8 @@ function loadProjects(){
     });
 
 }
+
+/* RENDER */
 
 function renderProjects(){
 
@@ -274,11 +338,20 @@ function renderProjects(){
 
             <h3>${project.project_name}</h3>
 
-            <p><b>Type:</b> ${project.type}</p>
+            <p>
+            <b>Type:</b>
+            ${project.type}
+            </p>
 
-            <p><b>Team:</b> ${project.team}</p>
+            <p>
+            <b>Team:</b>
+            ${project.team}
+            </p>
 
-            <p><b>Faculty:</b> ${project.faculty}</p>
+            <p>
+            <b>Faculty:</b>
+            ${project.faculty}
+            </p>
 
             <span class="status ${statusClass}">
                 ${project.status}
@@ -311,21 +384,39 @@ function renderProjects(){
 
 }
 
+/* EDIT */
+
 function editProject(no){
 
     let p =
     projects.find(x => x.no == no);
 
-    document.getElementById("editNo").value = p.no;
+    document.getElementById("editNo")
+    .value = p.no;
 
-    document.getElementById("project_name").value = p.project_name;
-    document.getElementById("status").value = p.status;
-    document.getElementById("type").value = p.type;
-    document.getElementById("team").value = p.team;
-    document.getElementById("faculty").value = p.faculty;
-    document.getElementById("launched").value = p.launched;
-    document.getElementById("website").value = p.website;
-    document.getElementById("description").value = p.description;
+    document.getElementById("project_name")
+    .value = p.project_name;
+
+    document.getElementById("status")
+    .value = p.status;
+
+    document.getElementById("type")
+    .value = p.type;
+
+    document.getElementById("team")
+    .value = p.team;
+
+    document.getElementById("faculty")
+    .value = p.faculty;
+
+    document.getElementById("launched")
+    .value = p.launched;
+
+    document.getElementById("website")
+    .value = p.website;
+
+    document.getElementById("description")
+    .value = p.description;
 
     document.getElementById("formTitle")
     .innerText = "Edit Project";
@@ -336,6 +427,8 @@ function editProject(no){
     });
 
 }
+
+/* SAVE */
 
 function saveProject(){
 
@@ -372,7 +465,8 @@ function saveProject(){
 
     };
 
-    // EDIT
+    /* UPDATE */
+
     if(editNo){
 
         fetch(API + "/no/" + editNo, {
@@ -401,7 +495,8 @@ function saveProject(){
 
     }
 
-    // ADD
+    /* ADD */
+
     else{
 
         fetch(API, {
@@ -432,7 +527,20 @@ function saveProject(){
 
 }
 
+/* DELETE */
+
 function deleteProject(no){
+
+    let pass =
+    prompt("Enter Delete Password");
+
+    if(pass !== DELETE_PASSWORD){
+
+        alert("Wrong Delete Password");
+
+        return;
+
+    }
 
     if(!confirm("Delete this project?"))
     return;
@@ -453,18 +561,36 @@ function deleteProject(no){
 
 }
 
+/* CLEAR FORM */
+
 function clearForm(){
 
-    document.getElementById("editNo").value = "";
+    document.getElementById("editNo")
+    .value = "";
 
-    document.getElementById("project_name").value = "";
-    document.getElementById("status").value = "";
-    document.getElementById("type").value = "";
-    document.getElementById("team").value = "";
-    document.getElementById("faculty").value = "";
-    document.getElementById("launched").value = "";
-    document.getElementById("website").value = "";
-    document.getElementById("description").value = "";
+    document.getElementById("project_name")
+    .value = "";
+
+    document.getElementById("status")
+    .value = "";
+
+    document.getElementById("type")
+    .value = "";
+
+    document.getElementById("team")
+    .value = "";
+
+    document.getElementById("faculty")
+    .value = "";
+
+    document.getElementById("launched")
+    .value = "";
+
+    document.getElementById("website")
+    .value = "";
+
+    document.getElementById("description")
+    .value = "";
 
     document.getElementById("formTitle")
     .innerText = "Add New Project";
