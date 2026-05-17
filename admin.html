@@ -6,7 +6,7 @@
 
 <title>RLabZ Admin Panel</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -18,27 +18,25 @@
 
 body{
     font-family:'Inter',sans-serif;
-    background: radial-gradient(circle at top,#1e3a8a,#020617);
+    background: radial-gradient(circle at top,#0f172a,#020617);
     color:white;
     min-height:100vh;
     padding:30px;
 }
 
 /* LOGIN */
-
 #loginBox{
-    max-width:400px;
+    max-width:420px;
     margin:100px auto;
-    background:rgba(255,255,255,0.05);
+    background:rgba(255,255,255,0.06);
     padding:30px;
-    border-radius:20px;
-    border:1px solid rgba(255,255,255,0.1);
-    backdrop-filter:blur(10px);
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,0.12);
+    backdrop-filter:blur(12px);
 }
 
-#loginBox h2{
-    margin-bottom:20px;
-    text-align:center;
+h2{
+    margin-bottom:15px;
 }
 
 input, textarea{
@@ -49,6 +47,8 @@ input, textarea{
     border-radius:10px;
     background:rgba(255,255,255,0.08);
     color:white;
+    outline:none;
+    font-family:inherit;
 }
 
 textarea{
@@ -64,22 +64,26 @@ button{
     background:linear-gradient(45deg,#38bdf8,#22c55e);
     color:white;
     cursor:pointer;
-    font-weight:bold;
+    font-weight:600;
+    transition:0.2s;
 }
 
-/* ADMIN PANEL */
-
-#adminPanel{
-    display:none;
+button:hover{
+    transform:scale(1.02);
 }
+
+/* ADMIN */
+#adminPanel{ display:none; }
 
 header{
-    text-align:center;
-    margin-bottom:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
 }
 
 header h1{
-    font-size:2.5rem;
+    font-size:2rem;
     background:linear-gradient(to right,#38bdf8,#22c55e);
     -webkit-background-clip:text;
     color:transparent;
@@ -87,69 +91,78 @@ header h1{
 
 .logout-btn{
     width:auto;
-    padding:10px 20px;
-    margin-top:15px;
+    padding:10px 18px;
     background:#ef4444;
 }
 
+/* FORM */
 .form-box{
     background:rgba(255,255,255,0.05);
     padding:25px;
-    border-radius:20px;
-    margin-bottom:30px;
+    border-radius:18px;
+    margin-bottom:25px;
     border:1px solid rgba(255,255,255,0.1);
 }
 
+/* GRID */
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:18px;
 }
 
+/* CARD */
 .card{
     background:rgba(255,255,255,0.05);
-    border-radius:20px;
-    padding:20px;
+    border-radius:18px;
+    padding:18px;
     border:1px solid rgba(255,255,255,0.1);
+    transition:0.2s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    background:rgba(255,255,255,0.07);
 }
 
 .card h3{
-    margin-bottom:10px;
+    margin-bottom:8px;
+    font-size:18px;
 }
 
 .card p{
     color:#cbd5e1;
-    margin:6px 0;
+    margin:5px 0;
+    font-size:13px;
 }
 
+/* BUTTONS */
 .action-btn{
     width:auto;
-    padding:10px 15px;
-    margin-right:10px;
+    padding:8px 12px;
+    margin-right:8px;
+    margin-top:10px;
+    font-size:12px;
 }
 
-.delete-btn{
-    background:#ef4444;
-}
+.delete-btn{ background:#ef4444; }
+.edit-btn{ background:#f59e0b; }
 
-.edit-btn{
-    background:#f59e0b;
-}
-
+/* STATUS */
 .status{
     display:inline-block;
-    padding:5px 10px;
+    padding:4px 10px;
     border-radius:20px;
-    font-size:12px;
+    font-size:11px;
     margin-top:10px;
 }
 
-.deployed{
-    background:#22c55e;
-}
+.deployed{ background:#22c55e; }
+.dev{ background:#f59e0b; }
 
-.dev{
-    background:#f59e0b;
+.small{
+    font-size:12px;
+    color:#94a3b8;
 }
 
 </style>
@@ -158,86 +171,43 @@ header h1{
 <body>
 
 <!-- LOGIN -->
-
 <div id="loginBox">
 
     <h2>RLabZ Admin Login</h2>
 
-    <input type="password"
-    id="password"
-    placeholder="Enter Password">
+    <input type="text" id="username" placeholder="Enter Username (Faculty Name)">
+    <input type="password" id="password" placeholder="Enter Password">
 
-    <button onclick="login()">
-        Login
-    </button>
+    <button onclick="login()">Login</button>
 
 </div>
 
-<!-- ADMIN PANEL -->
-
+<!-- ADMIN -->
 <div id="adminPanel">
 
 <header>
-
     <h1>RLabZ Admin Panel</h1>
-
-    <button class="logout-btn"
-    onclick="logout()">
-
-        Logout
-
-    </button>
-
+    <button class="logout-btn" onclick="logout()">Logout</button>
 </header>
-
-<!-- FORM -->
 
 <div class="form-box">
 
-    <h2 id="formTitle">
-        Add New Project
-    </h2>
+    <h2 id="formTitle">Add New Project</h2>
 
     <input type="hidden" id="editNo">
 
-    <input type="text"
-    id="project_name"
-    placeholder="Project Name">
+    <input id="project_name" placeholder="Project Name">
+    <input id="status" placeholder="Status (Deployed / In Development)">
+    <input id="type" placeholder="Type">
+    <input id="team" placeholder="Team">
+    <input id="faculty" placeholder="Faculty">
+    <input id="launched" placeholder="Launched">
+    <input id="website" placeholder="Website">
+    <textarea id="description" placeholder="Description"></textarea>
 
-    <input type="text"
-    id="status"
-    placeholder="Status">
-
-    <input type="text"
-    id="type"
-    placeholder="Type">
-
-    <input type="text"
-    id="team"
-    placeholder="Team">
-
-    <input type="text"
-    id="faculty"
-    placeholder="Faculty">
-
-    <input type="text"
-    id="launched"
-    placeholder="Launched">
-
-    <input type="text"
-    id="website"
-    placeholder="Website">
-
-    <textarea id="description"
-    placeholder="Description"></textarea>
-
-    <button onclick="saveProject()">
-        Save Project
-    </button>
+    <button onclick="saveProject()">Save Project</button>
 
 </div>
-
-<!-- PROJECTS -->
 
 <div class="grid" id="projectsGrid"></div>
 
@@ -245,369 +215,227 @@ header h1{
 
 <script>
 
-const API =
-"https://sheetdb.io/api/v1/bgnhxcleqnsyj";
+const API = "https://sheetdb.io/api/v1/bgnhxcleqnsyj";
 
 const ADMIN_PASSWORD = "rlabz123";
 
-const DELETE_PASSWORD = "rlabzandcs";
-
 let projects = [];
+let currentUser = "";
 
 /* LOGIN */
-
 function login(){
 
-    let pass =
-    document.getElementById("password").value;
+    let user = document.getElementById("username").value.trim();
+    let pass = document.getElementById("password").value;
 
-    if(pass === ADMIN_PASSWORD){
+    if(pass === ADMIN_PASSWORD && user !== ""){
 
-        document.getElementById("loginBox")
-        .style.display = "none";
+        currentUser = user;
 
-        document.getElementById("adminPanel")
-        .style.display = "block";
+        document.getElementById("loginBox").style.display="none";
+        document.getElementById("adminPanel").style.display="block";
 
         loadProjects();
 
+    } else {
+        alert("Invalid username or password");
     }
-    else{
-
-        alert("Wrong Password");
-
-    }
-
 }
 
 /* LOGOUT */
-
 function logout(){
+    document.getElementById("adminPanel").style.display = "none";
+    document.getElementById("loginBox").style.display = "block";
 
-    document.getElementById("adminPanel")
-    .style.display = "none";
+    // ✅ CLEAR LOGIN FIELDS
+    document.getElementById("password").value = "";
+    document.getElementById("username").value = "";
 
-    document.getElementById("loginBox")
-    .style.display = "block";
-
-    document.getElementById("password")
-    .value = "";
-
+    // ✅ CLEAR PROJECT FORM
+    clearForm();
 }
 
-/* LOAD PROJECTS */
-
+/* LOAD */
 function loadProjects(){
 
     fetch(API)
-
     .then(res => res.json())
-
     .then(data => {
 
         projects = data.filter(p =>
-
             p.project_name &&
-            p.project_name.trim() !== "" &&
-            p.project_name !== "project_name"
-
+            p.project_name.trim() !== ""
         );
 
         renderProjects();
-
     });
-
 }
 
 /* RENDER */
-
 function renderProjects(){
 
     let html = "";
 
-    projects.forEach(project => {
+    projects.forEach(p => {
 
-        let statusClass =
-        project.status === "Deployed"
-        ? "deployed"
-        : "dev";
+        let statusClass = (p.status === "Deployed") ? "deployed" : "dev";
 
         html += `
-
         <div class="card">
 
-            <h3>${project.project_name}</h3>
+            <h3>${p.project_name}</h3>
 
-            <p>
-            <b>Type:</b>
-            ${project.type}
-            </p>
+            <p class="small"><b>Type:</b> ${p.type}</p>
+            <p class="small"><b>Team:</b> ${p.team}</p>
+            <p class="small"><b>Faculty:</b> ${p.faculty}</p>
 
-            <p>
-            <b>Team:</b>
-            ${project.team}
-            </p>
-
-            <p>
-            <b>Faculty:</b>
-            ${project.faculty}
-            </p>
+            <p class="small"><b>Updated By:</b> ${p.updated_by || "-"}</p>
+            <p class="small"><b>Updated At:</b> ${p.updated_at || "-"}</p>
 
             <span class="status ${statusClass}">
-                ${project.status}
+                ${p.status}
             </span>
 
-            <br><br>
+            <br>
 
-            <button class="action-btn edit-btn"
-            onclick="editProject('${project.no}')">
-
-                Edit
-
-            </button>
-
-            <button class="action-btn delete-btn"
-            onclick="deleteProject('${project.no}')">
-
-                Delete
-
-            </button>
+            <button class="action-btn edit-btn" onclick="editProject('${p.no}')">Edit</button>
+            <button class="action-btn delete-btn" onclick="deleteProject('${p.no}')">Delete</button>
 
         </div>
-
         `;
-
     });
 
-    document.getElementById("projectsGrid")
-    .innerHTML = html;
-
+    document.getElementById("projectsGrid").innerHTML = html;
 }
 
 /* EDIT */
-
 function editProject(no){
 
-    let p =
-    projects.find(x => x.no == no);
+    let p = projects.find(x => x.no == no);
 
-    document.getElementById("editNo")
-    .value = p.no;
+    document.getElementById("editNo").value = p.no;
 
-    document.getElementById("project_name")
-    .value = p.project_name;
+    document.getElementById("project_name").value = p.project_name;
+    document.getElementById("status").value = p.status;
+    document.getElementById("type").value = p.type;
+    document.getElementById("team").value = p.team;
+    document.getElementById("faculty").value = p.faculty;
+    document.getElementById("launched").value = p.launched;
+    document.getElementById("website").value = p.website;
+    document.getElementById("description").value = p.description;
 
-    document.getElementById("status")
-    .value = p.status;
-
-    document.getElementById("type")
-    .value = p.type;
-
-    document.getElementById("team")
-    .value = p.team;
-
-    document.getElementById("faculty")
-    .value = p.faculty;
-
-    document.getElementById("launched")
-    .value = p.launched;
-
-    document.getElementById("website")
-    .value = p.website;
-
-    document.getElementById("description")
-    .value = p.description;
-
-    document.getElementById("formTitle")
-    .innerText = "Edit Project";
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
+    document.getElementById("formTitle").innerText = "Edit Project";
 }
 
 /* SAVE */
-
-/* SAVE */
-
 function saveProject(){
 
-    let editNo =
-    document.getElementById("editNo").value;
+    let editNo = document.getElementById("editNo").value;
 
-    /* AUTO GENERATE NEXT NUMBER */
+    let nextNo = Math.max(...projects.map(p => Number(p.no) || 0)) + 1;
 
-    let nextNo =
-    Math.max(
-        ...projects.map(p =>
-            Number(p.no) || 0
-        )
-    ) + 1;
+    let now = new Date().toLocaleString();
 
     let data = {
 
         no: editNo || String(nextNo),
 
-        project_name:
-        document.getElementById("project_name").value,
+        project_name: document.getElementById("project_name").value,
+        status: document.getElementById("status").value,
+        type: document.getElementById("type").value,
+        team: document.getElementById("team").value,
+        faculty: document.getElementById("faculty").value,
+        launched: document.getElementById("launched").value,
+        website: document.getElementById("website").value,
+        description: document.getElementById("description").value,
 
-        status:
-        document.getElementById("status").value,
-
-        type:
-        document.getElementById("type").value,
-
-        team:
-        document.getElementById("team").value,
-
-        faculty:
-        document.getElementById("faculty").value,
-
-        launched:
-        document.getElementById("launched").value,
-
-        website:
-        document.getElementById("website").value,
-
-        description:
-        document.getElementById("description").value
-
+        // FIXED PART
+        updated_by: currentUser,
+        updated_at: now
     };
-
-    /* UPDATE */
 
     if(editNo){
 
-        fetch(API + "/no/" + editNo, {
-
+        fetch(API + "/no/" + editNo,{
             method:"PATCH",
-
-            headers:{
-                "Content-Type":"application/json"
-            },
-
-            body: JSON.stringify({
-                data:data
-            })
-
+            headers:{ "Content-Type":"application/json" },
+            body: JSON.stringify({ data })
         })
-
-        .then(() => {
-
-            alert("Project Updated");
-
-            clearForm();
-
+        .then(()=>{
+            alert("Updated Successfully");
+	clearForm();
             loadProjects();
-
         });
 
-    }
+    } else {
 
-    /* ADD */
-
-    else{
-
-        fetch(API, {
-
+        fetch(API,{
             method:"POST",
-
-            headers:{
-                "Content-Type":"application/json"
-            },
-
-            body: JSON.stringify({
-                data:[data]
-            })
-
+            headers:{ "Content-Type":"application/json" },
+            body: JSON.stringify({ data:[data] })
         })
-
-        .then(() => {
-
-            alert("Project Added");
-
-            clearForm();
-
+        .then(()=>{
+            alert("Added Successfully");
+clearForm();
             loadProjects();
-
         });
-
     }
-
 }
-/* DELETE */
 
+/* DELETE */
 function deleteProject(no){
 
-    let pass =
-    prompt("Enter Delete Password");
+    let pass = prompt("Enter Delete Password");
 
-    if(pass !== DELETE_PASSWORD){
-
-        alert("Wrong Delete Password");
-
+    if(pass !== "rlabzandcs"){
+        alert("Wrong Password");
         return;
-
     }
 
-    if(!confirm("Delete this project?"))
-    return;
-
-    fetch(API + "/no/" + no, {
-
+    fetch(API + "/no/" + no,{
         method:"DELETE"
-
     })
-
-    .then(() => {
-
-        alert("Project Deleted");
-
+    .then(()=>{
+        alert("Deleted");
         loadProjects();
-
     });
-
 }
-
-/* CLEAR FORM */
-
 function clearForm(){
 
-    document.getElementById("editNo")
-    .value = "";
+    document.getElementById("editNo").value = "";
 
-    document.getElementById("project_name")
-    .value = "";
+    document.getElementById("project_name").value = "";
+    document.getElementById("status").value = "";
+    document.getElementById("type").value = "";
+    document.getElementById("team").value = "";
+    document.getElementById("faculty").value = "";
+    document.getElementById("launched").value = "";
+    document.getElementById("website").value = "";
+    document.getElementById("description").value = "";
 
-    document.getElementById("status")
-    .value = "";
-
-    document.getElementById("type")
-    .value = "";
-
-    document.getElementById("team")
-    .value = "";
-
-    document.getElementById("faculty")
-    .value = "";
-
-    document.getElementById("launched")
-    .value = "";
-
-    document.getElementById("website")
-    .value = "";
-
-    document.getElementById("description")
-    .value = "";
-
-    document.getElementById("formTitle")
-    .innerText = "Add New Project";
-
+    document.getElementById("formTitle").innerText = "Add New Project";
 }
-
 </script>
+<footer style="
+    margin-top:50px;
+    padding:25px 15px;
+    text-align:center;
+    color:#94a3b8;
+    font-size:14px;
+    border-top:1px solid rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.03);
+    backdrop-filter:blur(10px);
+">
 
+    <p style="margin-bottom:8px;">
+        Designed for <b style="color:#38bdf8;">Rajagiri CS Department</b> • Quick Access Portal
+    </p>
+
+    <p>
+        Powered by <b style="color:#22c55e;">RLabZ</b> &amp; <b style="color:#f59e0b;">AJ13</b> © 2026
+    </p>
+
+</footer>
 </body>
+
 </html>
