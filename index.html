@@ -2,248 +2,358 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<!-- ✅ MUST for mobile -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Rajagiri Quick Access</title> 
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
+<meta name="theme-color" content="#060a24">
+<title>Rajagiri Portal Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+:root{--text:#eef2ff;--muted:#a5b0d6;--edge:rgba(255,255,255,.18);--accent:#5eead4}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{min-height:100%}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:radial-gradient(1200px 800px at 70% -10%,#1b2a7a,transparent 60%),linear-gradient(170deg,#0a1240,#050719);overflow-x:hidden;line-height:1.5;position:relative}
+@media (pointer:fine){body,a,button,input{cursor:none}}
+#stars{position:fixed;inset:0;z-index:0;width:100%;height:100%}
+.wrap{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 20px}
 
-body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #1e3a8a, #020617);
-    color: white;
-}
+/* planets + rocket */
+.planet{position:fixed;border-radius:50%;z-index:1;pointer-events:none;animation:float 9s ease-in-out infinite alternate}
+.p1{width:130px;height:130px;top:16%;left:-30px;background:radial-gradient(circle at 30% 30%,#fde68a,#f59e0b 55%,#92400e);box-shadow:0 0 60px rgba(245,158,11,.35)}
+.p1::after{content:"";position:absolute;left:-40%;top:42%;width:180%;height:22%;border:3px solid rgba(253,230,138,.55);border-radius:50%;transform:rotate(-18deg)}
+.p2{width:90px;height:90px;bottom:22%;right:-18px;background:radial-gradient(circle at 35% 30%,#a5f3fc,#6366f1 60%,#1e1b4b);box-shadow:0 0 50px rgba(99,102,241,.45);animation-duration:12s}
+@keyframes float{to{transform:translateY(-34px) rotate(8deg)}}
+.rocket{position:fixed;z-index:1;font-size:30px;top:8%;left:-60px;pointer-events:none;animation:fly 18s linear infinite 4s;filter:drop-shadow(0 0 12px #f97316)}
+@keyframes fly{0%{transform:translate(0,60px) rotate(60deg)}100%{transform:translate(115vw,-30px) rotate(60deg)}}
 
-/* HEADER */
-header {
-    text-align: center;
-    padding: 30px 15px;
-}
-header h1 {
-    font-size: 2rem;
-    background: linear-gradient(to right, #38bdf8, #22c55e);
-    -webkit-background-clip: text;
-    color: transparent;
-}
-header p {
-    opacity: 0.7;
-    font-size: 14px;
-}
+/* top bar */
+.topbar{margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border-radius:22px;background:rgba(255,255,255,.07);border:1px solid var(--edge);border-top-color:rgba(255,255,255,.4);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Sora';font-weight:700}
+.logo{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;color:#07102e;background:conic-gradient(from 0deg,#5eead4,#818cf8,#f472b6,#fbbf24,#5eead4);animation:spin 6s linear infinite}
+.logo b{display:grid;place-items:center;width:26px;height:26px;border-radius:9px;background:#0a1240;color:#fff;animation:spin 6s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.clockbox{display:flex;align-items:center;gap:12px}
+.digital{text-align:right;font-family:'Sora';font-variant-numeric:tabular-nums}
+.digital .t{font-size:1.15rem;font-weight:700;text-shadow:0 0 14px rgba(94,234,212,.8)}
+.digital .d{font-size:12px;color:var(--muted);font-family:'Inter'}
+.colon{animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.15}}
+.analog{width:58px;height:58px;filter:drop-shadow(0 0 8px rgba(94,234,212,.5))}
+.analog line{stroke-linecap:round}
 
-/* SEARCH */
-.search-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 20px;
-}
+/* hero */
+.hero{text-align:center;padding:60px 0 20px}
+h1{font-family:'Sora';font-weight:800;font-size:clamp(2.1rem,6.4vw,4.2rem);line-height:1.1;letter-spacing:-.02em}
+h1 span{display:inline-block;background:linear-gradient(120deg,#fff,#5eead4,#818cf8,#f472b6,#fff);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:wave 2.6s ease-in-out infinite,hue 6s linear infinite}
+@keyframes wave{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes hue{to{background-position:300% 0}}
+.hero p{color:var(--muted);margin-top:14px;font-size:1.05rem;min-height:1.6em}
+.hero p i{display:inline-block;width:2px;height:1em;background:var(--accent);margin-left:3px;vertical-align:-2px;animation:blink 1s steps(2) infinite}
 
-.search-box input {
-    width: 100%;
-    max-width: 280px;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-}
+.search{max-width:520px;margin:28px auto 0;display:flex;align-items:center;gap:10px;padding:6px 8px 6px 18px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid var(--edge);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:.25s}
+.search:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px rgba(94,234,212,.2),0 0 40px rgba(94,234,212,.25)}
+.search input{flex:1;min-width:0;border:0;outline:0;background:none;color:var(--text);font:inherit;font-size:16px;padding:12px 0}
+.search input::placeholder{color:var(--muted)}
+.search button{border:0;font:inherit;font-weight:600;font-size:14px;padding:10px 18px;border-radius:999px;color:#07102e;background:linear-gradient(135deg,#5eead4,#99f6e4)}
+.search button[hidden]{display:none}
 
-.search-box button {
-    padding: 10px 14px;
-    border-radius: 8px;
-    border: none;
-    background: #22c55e;
-    color: white;
-    cursor: pointer;
-}
-.search-box button:hover {
-    background: #16a34a;
-}
+/* portals */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:26px 20px;padding:70px 0 20px}
+.card{display:block;text-decoration:none;color:inherit;text-align:center;position:relative;padding:62px 16px 20px;margin-top:10px;border-radius:26px;background:linear-gradient(160deg,rgba(255,255,255,.13),rgba(255,255,255,.04));border:1px solid var(--edge);border-top-color:rgba(255,255,255,.4);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 14px 36px rgba(2,4,24,.5);transform:perspective(700px) rotateX(var(--rx,0)) rotateY(var(--ry,0));transition:transform .15s,box-shadow .3s,border-color .3s;animation:pop .7s cubic-bezier(.2,1.4,.4,1) both;animation-delay:calc(var(--i)*70ms)}
+@keyframes pop{from{opacity:0;transform:translateY(60px) scale(.6) rotate(-6deg)}}
+.card:hover,.card:focus-visible{border-color:var(--c1);box-shadow:0 20px 50px rgba(2,4,24,.6),0 0 40px -6px var(--c1);outline:0}
+.ring{position:absolute;left:50%;top:-44px;width:92px;height:92px;margin-left:-46px;display:grid;place-items:center;font-size:32px;animation:bob 3.4s ease-in-out infinite;animation-delay:calc(var(--i)*-.4s)}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.ring::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,var(--c1),var(--c2),transparent 40%,var(--c1));animation:spin 3s linear infinite;-webkit-mask:radial-gradient(circle,transparent 52%,#000 54%);mask:radial-gradient(circle,transparent 52%,#000 54%);filter:drop-shadow(0 0 8px var(--c1))}
+.ring::after{content:"";position:absolute;inset:11px;border-radius:50%;background:radial-gradient(circle,#050719 30%,var(--c2) 140%);box-shadow:inset 0 0 18px var(--c1);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(.88);box-shadow:inset 0 0 28px var(--c2)}}
+.ring em{position:relative;z-index:1;font-style:normal;transition:transform .4s}
+.card:hover .ring::before{animation-duration:.7s}
+.card:hover .ring em{transform:scale(1.35) rotate(12deg)}
+.card h3{font-family:'Sora';font-size:16px;margin-top:8px}
+.card span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+.enter{display:inline-block;margin-top:12px;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;color:#07102e;background:linear-gradient(135deg,var(--c1),var(--c2));opacity:0;transform:translateY(8px);transition:.3s}
+.card:hover .enter,.card:focus-visible .enter{opacity:1;transform:none}
+.empty{display:none;text-align:center;color:var(--muted);padding:30px}
+.empty.show{display:block}
 
-/* GRID */
-.container {
-    padding: 20px;
-}
+footer{position:relative;z-index:2;max-width:1100px;margin:50px auto 110px;padding:20px;text-align:center;color:var(--muted);font-size:13px;line-height:1.8;border-radius:22px;background:rgba(255,255,255,.06);border:1px solid var(--edge);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+footer b:nth-of-type(1){color:#7dd3fc}footer b:nth-of-type(2){color:#5eead4}footer b:nth-of-type(3){color:#fbbf24}
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
-    gap: 15px;
-}
+/* warp + cursor */
+.warp{position:fixed;z-index:9998;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;pointer-events:none;background:conic-gradient(var(--c1),var(--c2),#fff,var(--c1));animation:warp .9s ease-in forwards}
+@keyframes warp{0%{transform:scale(0) rotate(0);opacity:1}70%{opacity:1}100%{transform:scale(160) rotate(540deg);opacity:0}}
+.dot,.cring{position:fixed;left:0;top:0;pointer-events:none;z-index:9999;border-radius:50%;display:none}
+.dot{width:8px;height:8px;margin:-4px;background:#fff;box-shadow:0 0 14px #5eead4,0 0 30px #5eead4}
+.cring{width:38px;height:38px;margin:-19px;border:2px solid rgba(94,234,212,.7);transition:width .25s,height .25s,margin .25s,background .25s,border-color .25s}
+.cring.big{width:68px;height:68px;margin:-34px;background:rgba(94,234,212,.12);border-color:#f472b6}
+.cring.down{width:26px;height:26px;margin:-13px}
+@media (pointer:fine){.dot,.cring{display:block}}
+.spark{position:fixed;z-index:9997;pointer-events:none;width:7px;height:7px;border-radius:50%;animation:spark .8s ease-out forwards}
+@keyframes spark{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
 
-/* CARD */
-.card {
-    background: rgba(255,255,255,0.08);
-    border-radius: 15px;
-    padding: 15px;
-    text-align: center;
-    transition: 0.3s;
-    backdrop-filter: blur(10px);
-}
+/* robot */
+.robot{position:fixed;left:0;bottom:6px;z-index:9000;width:68px;height:94px;will-change:transform}
+.hop{width:100%;height:100%}
+.flip{width:100%;height:100%;transform:scaleX(var(--dir,1))}
+.robot svg{width:100%;height:100%;overflow:visible}
+.robot .body{animation:idle 2.6s ease-in-out infinite}
+.walking .body{animation:bounce .5s ease-in-out infinite}
+@keyframes idle{50%{transform:translateY(-2px)}}
+@keyframes bounce{50%{transform:translateY(-4px) rotate(2deg)}}
+.leg,.arm{transform-origin:var(--o)}
+.walking .l1,.walking .a2{animation:swing .5s ease-in-out infinite alternate}
+.walking .l2,.walking .a1{animation:swing .5s ease-in-out infinite alternate-reverse}
+@keyframes swing{from{transform:rotate(-28deg)}to{transform:rotate(28deg)}}
+.waving .a2{animation:waveArm .35s ease-in-out infinite alternate}
+@keyframes waveArm{from{transform:rotate(150deg)}to{transform:rotate(110deg)}}
+.eye{animation:eyeblink 4s infinite;transform-origin:center;transform-box:fill-box}
+@keyframes eyeblink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+.led{animation:blink .8s steps(2) infinite}
+.jump .hop{animation:jump .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes jump{40%{transform:translateY(-70px)}}
+.bubble{position:absolute;bottom:100%;left:50%;transform:translateX(-50%) scale(0);transform-origin:bottom;white-space:nowrap;padding:7px 12px;margin-bottom:6px;border-radius:14px;font-size:12px;font-weight:600;color:#07102e;background:#fff;transition:transform .25s cubic-bezier(.3,1.6,.5,1);pointer-events:none}
+.bubble::after{content:"";position:absolute;top:100%;left:50%;margin-left:-6px;border:6px solid transparent;border-top-color:#fff}
+.bubble.on{transform:translateX(-50%) scale(1)}
+.shadow{position:absolute;left:10px;right:10px;bottom:-4px;height:8px;border-radius:50%;background:rgba(0,0,0,.35);filter:blur(3px)}
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
-
-/* ICON */
-.icon {
-    font-size: 26px;
-    margin-bottom: 8px;
-}
-
-/* TEXT */
-.card h3 {
-    font-size: 14px;
-}
-
-/* LINK */
-a {
-    text-decoration: none;
-    color: white;
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 15px;
-    font-size: 12px;
-    opacity: 0.7;
-}
-
-/* 📱 MOBILE OPTIMIZATION */
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.6rem;
-    }
-
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .card {
-        padding: 12px;
-    }
-
-    .card h3 {
-        font-size: 13px;
-    }
-}
-
-/* 💻 LARGE SCREEN IMPROVEMENT */
-@media (min-width: 1024px) {
-    .container {
-        padding: 40px 80px;
-    }
-}
+@media (max-width:560px){.hero{padding-top:44px}.analog{display:none}.grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
-
 <body>
 
-<header>
-<h1>Rajagiri Quick Access</h1>
-<p>All Essential Portals in One Place</p>
-</header>
+<canvas id="stars"></canvas>
+<div class="planet p1"></div><div class="planet p2"></div><div class="rocket">🚀</div>
 
-<div class="search-box">
-<input type="text" id="search" placeholder="Search portal..." onkeyup="filterCards()">
-<button onclick="resetSearch()">Reset</button>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand"><div class="logo"><b>R</b></div>Rajagiri CS Hub</div>
+    <div class="clockbox">
+      <div class="digital"><div class="t" id="time">--:--:--</div><div class="d" id="date"></div></div>
+      <svg class="analog" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="46" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.4)" stroke-width="2"/>
+        <g id="ticks" stroke="#a5b0d6" stroke-width="2"></g>
+        <line id="hh" x1="50" y1="50" x2="50" y2="27" stroke="#fff" stroke-width="4"/>
+        <line id="mh" x1="50" y1="50" x2="50" y2="16" stroke="#5eead4" stroke-width="3"/>
+        <line id="sh" x1="50" y1="56" x2="50" y2="12" stroke="#f472b6" stroke-width="1.6"/>
+        <circle cx="50" cy="50" r="3.5" fill="#fbbf24"/>
+      </svg>
+    </div>
+  </div>
+
+  <header class="hero">
+    <h1 id="title" aria-label="Rajagiri Portal Hub">Rajagiri Portal Hub</h1>
+    <p><span id="type"></span><i></i></p>
+    <div class="search">
+      <input type="search" id="search" placeholder="Search a portal" aria-label="Search portals" autocomplete="off">
+      <button id="clear" hidden>Clear</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty">No portal found. Clear the search to see them all.</div>
+  </main>
 </div>
 
-<div class="container">
-<div class="grid" id="grid">
-
-<a href="https://rajagiri.edu" target="_blank">
-<div class="card"><div class="icon">🏫</div><h3>College Site</h3></div>
-</a>
-
-<a href="https://fedena.rajagiri.edu/" target="_blank">
-<div class="card"><div class="icon">📊</div><h3>Fedena</h3></div>
-</a>
-
-<a href="https://lms.rajagiri.edu/login/index.php" target="_blank">
-<div class="card"><div class="icon">📚</div><h3>Moodle LMS</h3></div>
-</a>
-
-<a href="http://connect.rajagiri.edu/" target="_blank">
-<div class="card"><div class="icon">🌐</div><h3>Campus Connect</h3></div>
-</a>
-
-<a href="https://mypunch.rajagiri.edu/login_page/?next=/" target="_blank">
-<div class="card"><div class="icon">⏱️</div><h3>MyPunch</h3></div>
-</a>
-
-<a href="https://odtracker.rajagiri.edu/" target="_blank">
-<div class="card"><div class="icon">📝</div><h3>OD Tracker</h3></div>
-</a>
-
-<a href="https://digirex.rajagiri.edu/user/login.php" target="_blank">
-<div class="card"><div class="icon">📄</div><h3>Answer Sheet Portal</h3></div>
-</a>
-
-<a href="https://mentrix.rajagiri.edu" target="_blank">
-<div class="card"><div class="icon">🎯</div><h3>Mentrix</h3></div>
-</a>
-
-<a href="https://rlabz.in/" target="_blank">
-<div class="card"><div class="icon">💡</div><h3>RLabZ</h3></div>
-</a>
-
-<a href="details.html" target="_blank">
-<div class="card"><div class="icon">🚀</div><h3>RLabZ Projects</h3></div>
-</a>
-
-<a href="https://sites.google.com/rajagiri.edu/computer-science-department/home" target="_blank">
-<div class="card"><div class="icon">📂</div><h3>Department Documents</h3></div>
-</a>
-
-</div>
-</div>
-
-<footer style="
-    margin-top:50px;
-    padding:25px 15px;
-    text-align:center;
-    color:#94a3b8;
-    font-size:14px;
-    border-top:1px solid rgba(255,255,255,0.1);
-    background:rgba(255,255,255,0.03);
-    backdrop-filter:blur(10px);
-">
-
-    <p style="margin-bottom:8px;">
-        Designed for <b style="color:#38bdf8;">Rajagiri CS Department</b> • Quick Access Portal
-    </p>
-
-    <p>
-        Powered by <b style="color:#22c55e;">RLabZ</b> &amp; <b style="color:#f59e0b;">AJ13</b> © 2026
-    </p>
-
+<footer>
+  <div>Made for the <b>Rajagiri CS Department</b></div>
+  <div>Powered by <b>RLabZ</b> and <b>AJ13</b> &copy; 2026</div>
 </footer>
 
+<div class="robot" id="robot" title="Click me">
+  <div class="bubble" id="bubble"></div>
+  <div class="hop"><div class="flip" id="flip">
+    <svg viewBox="0 0 80 110">
+      <g class="body">
+        <g class="leg l1" style="--o:33px 78px"><rect x="28" y="78" width="10" height="20" rx="4" fill="#64748b"/><rect x="25" y="94" width="16" height="8" rx="4" fill="#334155"/></g>
+        <g class="leg l2" style="--o:47px 78px"><rect x="42" y="78" width="10" height="20" rx="4" fill="#64748b"/><rect x="39" y="94" width="16" height="8" rx="4" fill="#334155"/></g>
+        <g class="arm a1" style="--o:18px 52px"><rect x="13" y="50" width="9" height="24" rx="4.5" fill="#94a3b8"/></g>
+        <rect x="24" y="47" width="32" height="32" rx="9" fill="#cbd5e1"/>
+        <circle class="led" cx="40" cy="62" r="5" fill="#f472b6"/>
+        <rect x="30" y="72" width="20" height="3" rx="1.5" fill="#64748b"/>
+        <g class="arm a2" style="--o:62px 52px"><rect x="58" y="50" width="9" height="24" rx="4.5" fill="#94a3b8"/></g>
+        <line x1="40" y1="14" x2="40" y2="4" stroke="#94a3b8" stroke-width="3"/>
+        <circle class="led" cx="40" cy="4" r="4" fill="#5eead4"/>
+        <rect x="19" y="14" width="42" height="32" rx="11" fill="#e2e8f0"/>
+        <rect x="24" y="21" width="32" height="18" rx="8" fill="#0b1230"/>
+        <ellipse class="eye" cx="33" cy="30" rx="4" ry="5" fill="#5eead4"/>
+        <ellipse class="eye" cx="47" cy="30" rx="4" ry="5" fill="#5eead4"/>
+      </g>
+    </svg>
+  </div></div>
+  <div class="shadow"></div>
+</div>
+
+<div class="dot" id="dot"></div><div class="cring" id="cring"></div>
+
 <script>
-function filterCards() {
-    let input = document.getElementById("search").value.toLowerCase();
-    let cards = document.querySelectorAll(".card");
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = id => document.getElementById(id);
 
-    cards.forEach(card => {
-        let text = card.innerText.toLowerCase();
-        card.parentElement.style.display = text.includes(input) ? "block" : "none";
-    });
-}
+/* ---------- Portals ---------- */
+const portals = [
+  ['College Site','Official Rajagiri website','https://rajagiri.edu','🏫','#38bdf8','#818cf8'],
+  ['Fedena','Student records and fees','https://fedena.rajagiri.edu/','📊','#5eead4','#22c55e'],
+  ['Moodle LMS','Course material and assignments','https://lms.rajagiri.edu/login/index.php','📚','#fb923c','#f472b6'],
+  ['Campus Connect','Notices and campus network','http://connect.rajagiri.edu/','🌐','#60a5fa','#5eead4'],
+  ['MyPunch','Attendance punch records','https://mypunch.rajagiri.edu/login_page/?next=/','⏱️','#fbbf24','#f97316'],
+  ['OD Tracker','On-duty requests and status','https://odtracker.rajagiri.edu/','📝','#f472b6','#a78bfa'],
+  ['Answer Sheet Portal','View answer sheets on RAISE','https://raise.rajagiri.edu/','📄','#a3e635','#22d3ee'],
+  ['Mentrix','Mentoring and guidance','https://mentrix.rajagiri.edu','🎯','#f87171','#fbbf24'],
+  ['RLabZ','Innovation and research lab','https://rlabz.in/','💡','#c084fc','#60a5fa'],
+  ['RLabZ Projects','Projects built at the lab','details.html','🚀','#34d399','#38bdf8'],
+  ['Department Documents','Forms, circulars and files','https://sites.google.com/rajagiri.edu/computer-science-department/home','📂','#facc15','#fb7185']
+];
+const grid = $('grid');
+portals.forEach((p,i)=>{
+  const a = document.createElement('a');
+  a.className='card'; a.href=p[2]; a.target='_blank'; a.rel='noopener';
+  a.style.cssText=`--i:${i};--c1:${p[4]};--c2:${p[5]}`;
+  a.dataset.name = p[0];
+  a.innerHTML=`<div class="ring"><em>${p[3]}</em></div><h3>${p[0]}</h3><span>${p[1]}</span><div class="enter">Enter portal</div>`;
+  grid.appendChild(a);
+});
 
-function resetSearch() {
-    document.getElementById("search").value = "";
-    filterCards();
+/* ---------- Animated title + typewriter ---------- */
+const title = $('title');
+const words = title.textContent.split(' ');
+title.textContent = '';
+let li = 0;
+words.forEach((w,wi)=>{
+  [...w].forEach(c=>{
+    const s=document.createElement('span'); s.textContent=c; s.setAttribute('aria-hidden','true');
+    s.style.animationDelay=`${li*0.09}s, ${li*-0.2}s`; li++; title.appendChild(s);
+  });
+  if(wi<words.length-1) title.appendChild(document.createTextNode(' '));
+});
+const lines=['Step through a portal to any Rajagiri system.','Pick a portal. Hit the warp.','One page. Eleven doorways.'];
+const typeEl=$('type'); let ln=0,ch=0,del=false;
+(function type(){
+  const t=lines[ln];
+  typeEl.textContent=t.slice(0,ch);
+  if(!del&&ch<t.length){ch++;setTimeout(type,45)}
+  else if(!del){del=true;setTimeout(type,1800)}
+  else if(ch>0){ch--;setTimeout(type,22)}
+  else{del=false;ln=(ln+1)%lines.length;setTimeout(type,300)}
+})();
+
+/* ---------- Clock ---------- */
+const ticks=$('ticks');
+for(let i=0;i<12;i++){const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+  l.setAttribute('x1',50);l.setAttribute('x2',50);l.setAttribute('y1',i%3?8:6);l.setAttribute('y2',i%3?12:14);
+  l.setAttribute('transform',`rotate(${i*30} 50 50)`);ticks.appendChild(l)}
+const p2=n=>String(n).padStart(2,'0');
+function clock(){
+  const d=new Date(),s=d.getSeconds()+d.getMilliseconds()/1000,m=d.getMinutes()+s/60,h=(d.getHours()%12)+m/60;
+  $('hh').setAttribute('transform',`rotate(${h*30} 50 50)`);
+  $('mh').setAttribute('transform',`rotate(${m*6} 50 50)`);
+  $('sh').setAttribute('transform',`rotate(${s*6} 50 50)`);
+  const t=`${p2(d.getHours())}<span class="colon">:</span>${p2(d.getMinutes())}<span class="colon">:</span>${p2(d.getSeconds())}`;
+  if($('time').dataset.s!==t){$('time').dataset.s=t;$('time').innerHTML=t}
+  $('date').textContent=d.toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'short'});
+  requestAnimationFrame(clock);
 }
+clock();
+
+/* ---------- Starfield ---------- */
+const cv=$('stars'),cx=cv.getContext('2d');
+let W,H,stars=[],shoots=[],mx=0,my=0;
+function size(){W=cv.width=innerWidth;H=cv.height=innerHeight;
+  stars=Array.from({length:Math.min(170,W/6)},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.6+.3,p:Math.random()*6,z:Math.random()*.8+.2}))}
+size(); addEventListener('resize',size);
+function sky(t){
+  cx.clearRect(0,0,W,H);
+  stars.forEach(s=>{
+    cx.globalAlpha=.35+.65*Math.abs(Math.sin(t/900+s.p));cx.fillStyle='#fff';
+    cx.beginPath();cx.arc(s.x+mx*s.z*20,s.y+my*s.z*20,s.r,0,6.3);cx.fill();
+  });
+  if(!reduce&&Math.random()<.008)shoots.push({x:Math.random()*W*.7,y:Math.random()*H*.5,l:0,v:9+Math.random()*6});
+  shoots=shoots.filter(s=>s.l<60);
+  shoots.forEach(s=>{
+    s.l++;s.x+=s.v;s.y+=s.v*.45;
+    const g=cx.createLinearGradient(s.x,s.y,s.x-90,s.y-40);g.addColorStop(0,'rgba(94,234,212,.95)');g.addColorStop(1,'transparent');
+    cx.globalAlpha=1;cx.strokeStyle=g;cx.lineWidth=2;cx.beginPath();cx.moveTo(s.x,s.y);cx.lineTo(s.x-90,s.y-40);cx.stroke();
+  });
+  if(!reduce)requestAnimationFrame(sky);
+}
+requestAnimationFrame(sky);
+
+/* ---------- Cursor, sparkles, tilt ---------- */
+const dot=$('dot'),ring=$('cring'),fine=matchMedia('(pointer:fine)').matches;
+let cxp=innerWidth/2,cyp=innerHeight/2,rx=cxp,ry=cyp,lastSpark=0;
+const colors=['#5eead4','#818cf8','#f472b6','#fbbf24'];
+addEventListener('mousemove',e=>{
+  cxp=e.clientX;cyp=e.clientY;
+  dot.style.transform=`translate(${cxp}px,${cyp}px)`;
+  mx=cxp/innerWidth-.5;my=cyp/innerHeight-.5;
+  const n=performance.now();
+  if(!reduce&&fine&&n-lastSpark>45){
+    lastSpark=n;const s=document.createElement('i');s.className='spark';
+    s.style.cssText=`left:${cxp}px;top:${cyp}px;background:${colors[Math.random()*4|0]};--dx:${(Math.random()-.5)*50}px;--dy:${Math.random()*40+10}px`;
+    document.body.appendChild(s);setTimeout(()=>s.remove(),800);
+  }
+});
+(function follow(){rx+=(cxp-rx)*.18;ry+=(cyp-ry)*.18;ring.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(follow)})();
+addEventListener('mousedown',()=>ring.classList.add('down'));
+addEventListener('mouseup',()=>ring.classList.remove('down'));
+document.addEventListener('mouseover',e=>ring.classList.toggle('big',!!e.target.closest('a,button,input,.robot')));
+
+grid.addEventListener('mousemove',e=>{
+  const c=e.target.closest('.card');if(!c||reduce)return;
+  const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  c.style.setProperty('--ry',x*14+'deg');c.style.setProperty('--rx',-y*14+'deg');
+});
+grid.addEventListener('mouseout',e=>{const c=e.target.closest('.card');if(c){c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg')}});
+
+/* Portal warp on click (the link still opens in a new tab) */
+grid.addEventListener('click',e=>{
+  const c=e.target.closest('.card');if(!c)return;
+  const w=document.createElement('div');w.className='warp';
+  w.style.cssText=`left:${e.clientX||innerWidth/2}px;top:${e.clientY||innerHeight/2}px;--c1:${c.style.getPropertyValue('--c1')};--c2:${c.style.getPropertyValue('--c2')}`;
+  document.body.appendChild(w);setTimeout(()=>w.remove(),950);
+  say(`Warping to ${c.dataset.name}!`,2200);hop();
+});
+
+/* ---------- Search ---------- */
+const input=$('search'),clear=$('clear'),empty=$('empty');
+function filter(){
+  const q=input.value.trim().toLowerCase();let n=0;
+  grid.querySelectorAll('.card').forEach(c=>{const m=c.innerText.toLowerCase().includes(q);c.style.display=m?'':'none';if(m)n++});
+  empty.classList.toggle('show',!n);clear.hidden=!q;
+}
+input.addEventListener('input',filter);
+clear.addEventListener('click',()=>{input.value='';filter();input.focus()});
+addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement!==input){e.preventDefault();input.focus()}});
+
+/* ---------- Wandering robot ---------- */
+const robot=$('robot'),flip=$('flip'),bubble=$('bubble');
+let rxp=innerWidth*.15,dir=1,target=rxp,mode='idle',until=0,bt;
+const talk=['Beep boop! 🤖','Which portal today?','I walk where I like.','Try the Moodle one!','Psst, click me.','Exploring the hub…','Warp speed ready.','Is it Friday yet?'];
+function say(t,ms=2600){bubble.textContent=t;bubble.classList.add('on');clearTimeout(bt);bt=setTimeout(()=>bubble.classList.remove('on'),ms)}
+function hop(){robot.classList.remove('jump');void robot.offsetWidth;robot.classList.add('jump');setTimeout(()=>robot.classList.remove('jump'),750)}
+function setMode(m){mode=m;robot.classList.toggle('walking',m==='walk');robot.classList.toggle('waving',m==='wave')}
+function decide(now){
+  const r=Math.random();
+  if(r<.6){target=40+Math.random()*Math.max(100,innerWidth-150);dir=target>rxp?1:-1;flip.style.setProperty('--dir',dir);setMode('walk')}
+  else if(r<.8){setMode('wave');until=now+2200;say(talk[Math.random()*talk.length|0])}
+  else{setMode('idle');until=now+1500+Math.random()*2000;if(Math.random()<.5)say(talk[Math.random()*talk.length|0])}
+}
+let prev=performance.now();
+function step(now){
+  const dt=Math.min(now-prev,60)/1000;prev=now;
+  if(mode==='walk'){
+    rxp+=dir*80*dt;
+    if((dir>0&&rxp>=target)||(dir<0&&rxp<=target)){setMode('idle');until=now+1200+Math.random()*2500}
+  }else if(now>until){decide(now)}
+  robot.style.transform=`translateX(${rxp}px)`;
+  requestAnimationFrame(step);
+}
+robot.style.transform=`translateX(${rxp}px)`;
+if(!reduce)requestAnimationFrame(step);
+robot.addEventListener('click',()=>{
+  say(['Ouch! Hello 👋','Wheee!','Beep!','Stop poking me 😄'][Math.random()*4|0]);hop();
+});
+setTimeout(()=>say('Hi! I live here. 🤖',3000),1200);
 </script>
-
 </body>
 </html>
